@@ -1,0 +1,78 @@
+{
+	"info": {
+		"_postman_id": "10312a17-934c-4327-a961-5e8aee481e43",
+		"name": "Ferreteria Juanito",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "30429709"
+	},
+	"item": [
+		{
+			"name": "Crear Usuario",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"id\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\",\r\n  \"nombre\": \"Eduardo\",\r\n  \"apellido\": \"Chacon\",\r\n  \"email\": \"eduardo.chacon@siigroup.cl\",\r\n  \"telefono\": \"123487672\",\r\n  \"direccion\": \"Exequiel Fernandez\",\r\n  \"genero\": \"male\",\r\n  \"pwd\": \"12345678\",\r\n  \"memberSince\": \"2023-12-05T21:55:59.246Z\",\r\n  \"rol\": 1\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:7021/api/user/CreateUser",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7021",
+					"path": [
+						"api",
+						"user",
+						"CreateUser"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"email\": \"eduardo.chacon@siigroup.cl\",\r\n  \"pwd\": \"12345678\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:7021/api/user/LoginUser",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7021",
+					"path": [
+						"api",
+						"user",
+						"LoginUser"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Crear Producto",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		}
+	]
+}
