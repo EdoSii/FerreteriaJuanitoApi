@@ -31,6 +31,7 @@ namespace FerreteriaJuanitoApi.Services
             catch(Exception ex) 
             {
                 Log.Error(ex, "Hubo un error al tratar de crear usuario");
+                throw ex;
             }
         }
         public bool FindUser(Usuario usuario)
