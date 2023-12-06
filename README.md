@@ -19,7 +19,7 @@ Para realizar la configuracion:
   - Login
 
   # Características y Funcionalidades
-  Todas las entidades deven tener implementado su correspondiente ABM, a menos que sea implício el no tener que soportar alguna de estas acciones.
+  Todas las entidades deben tener implementado su correspondiente ABM, a menos que sea implício el no tener que soportar alguna de estas acciones.
 
   # Usuario
   - Creacion de Usuario
