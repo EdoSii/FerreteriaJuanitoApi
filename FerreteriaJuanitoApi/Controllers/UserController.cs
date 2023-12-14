@@ -14,11 +14,13 @@ namespace FerreteriaJuanitoApi.Controllers
     {
         private readonly IConfiguration _config;
         private readonly IUserService _userService;
+        private readonly IJwtService _jwtService;
 
-        public UserController(IConfiguration configuration, IUserService userService)
+        public UserController(IConfiguration configuration, IUserService userService, IJwtService jwtService)
         {
             _config = configuration;
             _userService = userService;
+            _jwtService = jwtService;
         }
 
         [AllowAnonymous]
@@ -42,21 +44,21 @@ namespace FerreteriaJuanitoApi.Controllers
         [HttpPost("LoginUser")]
         public IActionResult Login(Login usuario)
         {
-            var userAvalible = _userService.GetUser(usuario);
-            //validar si usuario esta habilitado
-            if(userAvalible != null) 
+            var userAvailable = _userService.GetUser(usuario);
+            // validar si el usuario está habilitado
+            if (userAvailable != null)
             {
                 Log.Information($"Login exitoso para el usuario {usuario.Email}");
 
-                return Ok(new JwtService(_config).GenerateToken(
-                    userAvalible.Id.ToString(),
-                    userAvalible.Nombre,
-                    userAvalible.Apellido,
-                    userAvalible.Email,
-                    userAvalible.Telefono,
-                    userAvalible.Genero
-                    )
-                );
+                return Ok(_jwtService.GenerateToken(
+                    userAvailable.Id.ToString(),
+                    userAvailable.Nombre,
+                    userAvailable.Apellido,
+                    userAvailable.Email,
+                    userAvailable.Telefono,
+                    userAvailable.Genero,
+                    userAvailable.Rol
+                ));
             }
             Log.Information($"Login rechazado para el usuario {usuario.Email}");
 

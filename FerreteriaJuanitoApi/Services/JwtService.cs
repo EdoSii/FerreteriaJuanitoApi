@@ -1,4 +1,5 @@
-﻿using Microsoft.IdentityModel.Tokens;
+﻿using FerreteriaJuanitoApi.Models;
+using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
@@ -7,7 +8,7 @@ namespace FerreteriaJuanitoApi.Services
 {
     public interface IJwtService
     {
-        string GenerateToken(string id, string firstname, string lastname, string email, string phone, string gender);
+        string GenerateToken(string id, string firstname, string lastname, string email, string phone, string gender, Rol rol);
     }
     public class JwtService : IJwtService
     {
@@ -22,7 +23,7 @@ namespace FerreteriaJuanitoApi.Services
             TokenDuration = int.Parse(_configuration.GetSection("jwtConfig").GetSection("Duration").Value);
         }
 
-        public string GenerateToken(string id, string firstname, string lastname, string email, string phone, string gender)
+        public string GenerateToken(string id, string firstname, string lastname, string email, string phone, string gender, Rol rol)
         {
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(SecretKey));
 
@@ -35,7 +36,8 @@ namespace FerreteriaJuanitoApi.Services
                 new Claim("lastname", lastname),
                 new Claim("email", email),
                 new Claim("phone", phone),
-                new Claim("gender", gender)
+                new Claim("gender", gender),
+                new Claim(ClaimTypes.Role,rol.ToString())
             };
 
             var jwtToken = new JwtSecurityToken(
