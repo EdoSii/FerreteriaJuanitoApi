@@ -8,8 +8,8 @@ This API includes the Serilog library for log tracking.
 # Instructions for configuring the database and Serilog library.
 The project comes with the Entity Framework (EF) library for managing migrations in SQL Server.
 To perform the configuration:
--First: You must add the database connection string to the `appsettings.json`. This file also contains the configuration for creating a table to track logs, if desired.
--Second: Run the CLI in the IDE's terminal as follows: `dotnet ef database update Adjustes2`. Or, if you're experienced with this library, you can run `dotnet ef remove migrations` to start a fresh migration.
+- First: You must add the database connection string to the `appsettings.json`. This file also contains the configuration for creating a table to track logs, if desired.
+- Second: Run the CLI in the IDE's terminal as follows: `dotnet ef database update Adjustes2`. Or, if you're experienced with this library, you can run `dotnet ef remove migrations` to start a fresh migration.
 
 # Basic Entities
 - User
