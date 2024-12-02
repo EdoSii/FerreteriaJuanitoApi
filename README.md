@@ -27,11 +27,17 @@ All entities must have their corresponding CRUD (Create, Read, Update, Delete) i
 # User
 - User Creation
 - Login
-
+- EditUser
+- Delete
+  
 # Products
 - Product Creation
 - Edit Product
 - Delete Product
+
+# ShopingCar
+- Add Product
+- Purchase
 
 
 
@@ -65,9 +71,15 @@ Para realizar la configuracion:
   # Usuario
   - Creacion de Usuario
   - Login
+  - Editar Usuario
+  - Eliminar
 
   # Productos
   - Creacion de Producto
   - Editar producto
   - Eliminar producto
+
+  # Carrito de Compra
+  - Agregar Producto
+  - Realizar la Compra
   
