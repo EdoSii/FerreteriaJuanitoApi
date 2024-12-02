@@ -27,17 +27,16 @@ namespace FerreteriaJuanitoApi.Controllers
         [HttpPost("CreateUser")]
         public IActionResult Create(Usuario usuario)
         {
-            //validar si usuario existe
-            if(_userService.FindUser(usuario)) 
+            // Validar si el usuario ya existe
+            if (_userService.FindUser(usuario))
             {
-                Log.Information("Se intento crear un usuario que ya existe");
-
+                Log.Information("Se intentó crear un usuario que ya existe");
                 return Ok("Usuario ya existe");
             }
             _userService.CreateUser(usuario);
-            Log.Information($"Se creo un usuario nuevo con id: {usuario.Id}");
+            Log.Information($"Se creó un usuario nuevo con id: {usuario.Id}");
 
-            return Ok("Usuario Creado");
+            return Ok("Usuario creado");
         }
 
         [AllowAnonymous]
@@ -45,7 +44,7 @@ namespace FerreteriaJuanitoApi.Controllers
         public IActionResult Login(Login usuario)
         {
             var userAvailable = _userService.GetUser(usuario);
-            // validar si el usuario está habilitado
+            // Validar si el usuario está habilitado
             if (userAvailable != null)
             {
                 Log.Information($"Login exitoso para el usuario {usuario.Email}");
@@ -63,6 +62,52 @@ namespace FerreteriaJuanitoApi.Controllers
             Log.Information($"Login rechazado para el usuario {usuario.Email}");
 
             return Ok("No se pudo hacer login");
+        }
+
+        // Método para editar usuario
+        [Authorize(Roles = "Admin")] // Asegúrate de que solo usuarios con rol Admin puedan editar
+        [HttpPut("EditUser/{id}")]
+        public IActionResult Edit(Guid id, [FromBody] Usuario usuario)
+        {
+            var existingUser = _userService.GetUserById(id);
+
+            if (existingUser == null)
+            {
+                Log.Information($"Usuario con id {id} no encontrado para editar");
+                return NotFound("Usuario no encontrado");
+            }
+
+            // Actualiza las propiedades del usuario
+            existingUser.Nombre = usuario.Nombre;
+            existingUser.Apellido = usuario.Apellido;
+            existingUser.Email = usuario.Email;
+            existingUser.Telefono = usuario.Telefono;
+            existingUser.Genero = usuario.Genero;
+            existingUser.Rol = usuario.Rol;
+
+            _userService.UpdateUser(existingUser);
+            Log.Information($"Usuario con id {id} ha sido actualizado");
+
+            return Ok("Usuario actualizado");
+        }
+
+        // Método para eliminar usuario
+        [Authorize(Roles = "Admin")] // Solo usuarios con rol Admin pueden eliminar
+        [HttpDelete("DeleteUser/{id}")]
+        public IActionResult Delete(Guid id)
+        {
+            var userToDelete = _userService.GetUserById(id);
+
+            if (userToDelete == null)
+            {
+                Log.Information($"Usuario con id {id} no encontrado para eliminar");
+                return NotFound("Usuario no encontrado");
+            }
+
+            _userService.DeleteUser(id);
+            Log.Information($"Usuario con id {id} ha sido eliminado");
+
+            return Ok("Usuario eliminado");
         }
     }
 }

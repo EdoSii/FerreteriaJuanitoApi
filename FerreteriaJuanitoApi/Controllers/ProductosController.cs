@@ -71,7 +71,6 @@ namespace FerreteriaJuanitoApi.Controllers
                     {
                         foreach (var item in carritoItems)
                         {
-                            item.SubTotal = item.Cantidad * producto.PrecioVigente;
                             item.Carrito.SubTotal = item.Carrito.CarritosItems.Sum(s => s.SubTotal);
                             item.Carrito.MensajeActualizacion = "Precio Actualizado";
                         }

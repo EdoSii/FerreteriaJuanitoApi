@@ -8,17 +8,16 @@ namespace FerreteriaJuanitoApi.Models
         [Key]
         public Guid Id { get; set; }
         public decimal Total { get; set; }
+
         [ForeignKey(nameof(Cliente))]
         public Guid ClienteId { get; set; }
         public Cliente Cliente { get; set; }
 
         [ForeignKey(nameof(Carrito))]
-
         public Guid CarritoId { get; set; }
         public Carrito Carrito { get; set; }
 
         [Display(Name = "Fecha de Compra")]
-        public DateTime FechaCompra { get; set; }
-
+        public DateTime FechaCompra { get; set; } = DateTime.UtcNow; // Establecer valor por defecto
     }
 }
