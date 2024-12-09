@@ -50,8 +50,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJw
 
 builder.Services.AddSwaggerGen(c =>
 {
-    c.SwaggerDoc("v1", new OpenApiInfo { Title = "Your API", Version = "v1" });
-
+    c.SwaggerDoc("v1", new OpenApiInfo { Title = "Ferreteria Juanito", Version = "v1" });
     var securityScheme = new OpenApiSecurityScheme
     {
         Name = "JWT Authentication",
@@ -106,7 +105,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
+app.UseStatusCodePages();
 app.UseCors(myAllowSpecificOrigins);
 Log.Information("Iniciando la aplicación...");
 

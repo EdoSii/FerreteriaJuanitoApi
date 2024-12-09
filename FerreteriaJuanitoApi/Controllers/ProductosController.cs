@@ -10,6 +10,7 @@ namespace FerreteriaJuanitoApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class ProductosController : ControllerBase
     {
         private readonly IProductosService _productosService;
@@ -45,7 +46,7 @@ namespace FerreteriaJuanitoApi.Controllers
         }
 
         [Authorize(Roles = "Administrador")]
-        [HttpPost("Editar")]
+        [HttpPut("Editar")]
         public IActionResult Update(Guid id, Producto producto) 
         {
             //validar id del producto
@@ -101,7 +102,7 @@ namespace FerreteriaJuanitoApi.Controllers
         }
 
         [Authorize(Roles = nameof(Rol.Administrador))]
-        [HttpPost("Delete")]
+        [HttpDelete("Delete")]
         public IActionResult Delete(Guid id)
         {
             _productosService.Delete(id);
